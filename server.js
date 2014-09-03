@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var requestClient = require('request');
 var token = require('./modules/token');
+var user = require('./modules/users')();
 
 var app = express();
 app.use(bodyParser.json());
@@ -17,8 +18,14 @@ app.post('/user/login', function(req, res) {
 });
 
 // Find User
-app.get('/user/:email', function(req, res) {
+app.post('/user', function(req, res) {
     res.send('getUser');
+});
+
+
+app.get('/test', function(req, res){
+	user.createUser();
+	res.send("User Created");
 });
 
 app.listen(3000, function() {
